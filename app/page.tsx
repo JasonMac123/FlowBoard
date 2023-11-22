@@ -1,3 +1,21 @@
+import { Medal } from "lucide-react";
+
 export default function Home() {
-  return <main></main>;
+  return (
+    <div className="h-full bg-slate-100">
+      <main className="pt-40 pb-20 bg-slate-100">
+        <div className="flex items-center justify-center flex-col">
+          <div className="flex items-center justify-center flex-col">
+            <div className="mb-4 flex items-center border shadow-sm p-4 bg-amber-100 text-amber-700 rounded-full uppercase">
+              <Medal className="h-6 w-6 mr-2" />
+            </div>
+          </div>
+          <h1 className="text-3xl md:text-6xl text-center text-neutral-800">
+            FlowBoard manages your tasks efficiently
+          </h1>
+          <div></div>
+        </div>
+      </main>
+    </div>
+  );
 }
