@@ -1,5 +1,6 @@
 import Link from "next/link";
 import localFont from "next/font/local";
+import { Poppins } from "next/font/google";
 import { Medal } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -7,6 +8,11 @@ import { Button } from "@/components/ui/button";
 
 const headingFont = localFont({
   src: "../public/fonts/font.woff2",
+});
+
+const textFont = Poppins({
+  subsets: ["latin"],
+  weight: ["100", "300", "500", "700", "900"],
 });
 
 export default function Home() {
@@ -31,7 +37,12 @@ export default function Home() {
               Work efficiently
             </div>
           </div>
-          <div className="text-sm md:text-xl text-neutral-400 mt-4 max-w-xs md:max-w-2xl text-center mx-auto">
+          <div
+            className={cn(
+              "text-sm md:text-xl text-neutral-400 mt-4 max-w-xs md:max-w-2xl text-center mx-auto",
+              textFont.className
+            )}
+          >
             Collaborate, manage projects, and increase your productivity!
             Accomplish it with FlowBoard
           </div>
