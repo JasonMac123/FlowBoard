@@ -1,4 +1,7 @@
+import Link from "next/link";
 import { Medal } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -22,6 +25,9 @@ export default function Home() {
           Collaborate, manage projects, and increase your productivity!
           Accomplish it with FlowBoard
         </div>
+        <Button className="mt-6" size="lg" asChild>
+          <Link href="/sign-up">Get Flowboard for free</Link>
+        </Button>
       </main>
     </div>
   );
