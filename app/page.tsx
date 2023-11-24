@@ -18,6 +18,10 @@ export default function Home() {
             Work efficiently
           </div>
         </div>
+        <div className="text-sm md:text-xl text-neutral-400 mt-4 max-w-xs md:max-w-2xl text-center mx-auto">
+          Collaborate, manage projects, and increase your productivity!
+          Accomplish it with FlowBoard
+        </div>
       </main>
     </div>
   );
