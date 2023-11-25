@@ -11,7 +11,7 @@ export const NavBar = () => {
           <Button size="sm" variant="outline" asChild>
             <Link href={"/sign-in"}>Login</Link>
           </Button>
-          <Button>
+          <Button size="sm" asChild>
             <Link href={"/sign-up"}>Start using Flowboard</Link>
           </Button>
         </div>
