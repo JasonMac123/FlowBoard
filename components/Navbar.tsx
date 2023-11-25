@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Logo } from "./Logo";
 import { Button } from "./ui/button";
 
@@ -7,8 +8,12 @@ export const NavBar = () => {
       <div className="md:max-w--screen-2xl mx-auto flex items-center w-full justify-between">
         <Logo />
         <div className="space-x-4 md:block md:w-auto flex items-center justify-between w-full">
-          <Button>Login</Button>
-          <Button>Start using Flowboard</Button>
+          <Button size="sm" variant="outline" asChild>
+            <Link href={"/sign-in"}>Login</Link>
+          </Button>
+          <Button>
+            <Link href={"/sign-up"}>Start using Flowboard</Link>
+          </Button>
         </div>
       </div>
     </div>
