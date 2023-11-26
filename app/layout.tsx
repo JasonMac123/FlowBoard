@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 
 import { NavBar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,9 +29,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn("bg-slate-100 h-full", inter.className)}>
-        <NavBar />
-        {children}
-        <Footer />
+        <ClerkProvider>
+          <NavBar />
+          {children}
+          <Footer />
+        </ClerkProvider>
       </body>
     </html>
   );
