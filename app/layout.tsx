@@ -10,8 +10,14 @@ import { Footer } from "@/components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Taskify",
+  title: "",
   description: "Collaborate, manage projects, and increase your producitivity",
+  icons: [
+    {
+      url: "/logo.svg",
+      href: "/logo.svg",
+    },
+  ],
 };
 
 export default function RootLayout({
