@@ -9,3 +9,5 @@ const ProtectedPage = () => {
     </div>
   );
 };
+
+export default ProtectedPage;
