@@ -80,12 +80,12 @@ export const SideBar: React.FC<SideBarProps> = ({
         defaultValue={defaultAccordionValue}
         className="space-y-2"
       >
-        {userMemberships.data.map((organization) => (
+        {userMemberships.data.map(({ organization }) => (
           <NavItem
             key={organization.id}
             isActive={activeOranization?.id === organization.id}
             isExpanded={expanded[organization.id]}
-            organization={organization as unknown as Organization}
+            organization={organization as Organization}
             onExpand={onExpand}
           />
         ))}

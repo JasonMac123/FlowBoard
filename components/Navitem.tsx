@@ -1,8 +1,9 @@
 "use client";
 
+import Image from "next/image";
+
 import { cn } from "@/lib/utils";
 import { AccordionItem, AccordionTrigger } from "./ui/accordion";
-import Image from "next/image";
 
 export type Organization = {
   id: string;
