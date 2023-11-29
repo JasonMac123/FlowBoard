@@ -14,6 +14,8 @@ import { Separator } from "./ui/separator";
 import { Skeleton } from "./ui/skeleton";
 import { Accordion } from "./ui/accordion";
 
+import { NavItem } from "./Navitem";
+
 interface SideBarProps {
   storageKey?: string;
 }
@@ -79,7 +81,13 @@ export const SideBar: React.FC<SideBarProps> = ({
         className="space-y-2"
       >
         {userMemberships.data.map((organization) => (
-          <p key={organization.id}>{organization.id}</p>
+          <NavItem
+            key={organization.id}
+            isActive={activeOranization?.id === organization.id}
+            isExpanded={expanded[organization.id]}
+            organization={organization}
+            onExpand={onExpand}
+          />
         ))}
       </Accordion>
     </>
