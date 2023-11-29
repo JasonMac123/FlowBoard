@@ -1,3 +1,5 @@
+"use client";
+
 import { OrganizationList } from "@clerk/clerk-react";
 
 const CreateOrganizationPage = () => {
