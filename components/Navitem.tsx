@@ -37,7 +37,7 @@ export const NavItem: React.FC<NavItemProps> = ({
 
   const routes = [
     {
-      label: "Boards",
+      label: "Board",
       icon: <Layout className="h-4 w-4 mr-2" />,
       href: `/organization/${organization.id}`,
     },
@@ -88,7 +88,11 @@ export const NavItem: React.FC<NavItemProps> = ({
               "w-full font-normal justify-start pl-10 mb-1",
               pathname === route.href && "bg-sky-500/10"
             )}
-          />
+            variant="ghost"
+          >
+            {route.icon}
+            {route.label}
+          </Button>
         ))}
       </AccordionContent>
     </AccordionItem>
