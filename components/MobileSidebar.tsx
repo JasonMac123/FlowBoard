@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 import { useMobileSideBar } from "@/hooks/useMobileSideBar";
+import { Menu } from "lucide-react";
+import { Button } from "./ui/button";
+import { Sheet, SheetContent } from "./ui/sheet";
+import { SideBar } from "./Sidebar";
 
 export const MobileSideBar = () => {
   const pathname = usePathname();
@@ -24,5 +28,21 @@ export const MobileSideBar = () => {
     return null;
   }
 
-  return <div></div>;
+  return (
+    <>
+      <Button
+        onClick={onOpen}
+        className="block md:hidden"
+        variant="ghost"
+        size="sm"
+      >
+        <Menu className="h-4 w-4" />
+      </Button>
+      <Sheet open={isOpen} onOpenChange={onClose}>
+        <SheetContent side="left" className="p-2 pt-10">
+          <SideBar storageKey="t-sidebar-mobile-state" />
+        </SheetContent>
+      </Sheet>
+    </>
+  );
 };
