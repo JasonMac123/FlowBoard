@@ -1,11 +1,15 @@
+import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
+
 import { Plus } from "lucide-react";
 import { Button } from "../ui/button";
+
 import { Logo } from "./Logo";
-import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
+import { MobileSideBar } from "../MobileSidebar";
 
 const UserNavBar = () => {
   return (
     <nav className="fixed z-50 top-0 w-full px-4 h-14 border-b shadow-sm bg-white flex items-center">
+      <MobileSideBar />
       <div className="flex items-center gap-x-4">
         <div className="hidden md:flex">
           <Logo />
