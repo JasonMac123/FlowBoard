@@ -43,6 +43,7 @@ export const NavItem: React.FC<NavItemProps> = ({
               className="rounded-sm object-cover"
             />
           </div>
+          <span className="font-medium">{organization.name}</span>
         </div>
       </AccordionTrigger>
     </AccordionItem>
