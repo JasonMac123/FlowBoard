@@ -1,9 +1,11 @@
-import { db } from "@/prisma/db";
+import { Info } from "@/components/organization/Info";
 
 const OrganizationIdPage = async () => {
-  const boards = await db.board.findMany();
-
-  return <div></div>;
+  return (
+    <div className="w-full mb-20">
+      <Info />
+    </div>
+  );
 };
 
 export default OrganizationIdPage;
