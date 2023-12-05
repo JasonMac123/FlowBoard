@@ -12,7 +12,7 @@ interface HoverHintProps {
   sideOffset?: number;
 }
 
-export const Hint = ({
+export const HoverHint = ({
   children,
   description,
   side = "bottom",

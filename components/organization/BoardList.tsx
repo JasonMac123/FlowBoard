@@ -1,4 +1,5 @@
-import { User2 } from "lucide-react";
+import { HelpCircle, User2 } from "lucide-react";
+import { HoverHint } from "../HoverHint";
 
 export const BoardList = () => {
   return (
@@ -14,6 +15,12 @@ export const BoardList = () => {
         >
           <p className="text-sm">Create a Board</p>
           <span className="text-xs"># of Boards</span>
+          <HoverHint
+            sideOffset={40}
+            description={`There is a limit to the amount of boards made`}
+          >
+            <HelpCircle className="absolute bottom-2 right-2 h-[14px] w-[14px]" />
+          </HoverHint>
         </div>
       </div>
     </div>
