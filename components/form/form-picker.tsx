@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useFormStatus } from "react-dom";
 
 import { unsplash } from "@/lib/unsplash";
-import { Loader2 } from "lucide-react";
+import { Check, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import { defaultImages } from "@/lib/images";
@@ -71,6 +71,11 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
               setSelectedImageId(image.id);
             }}
           >
+            {selectedImageId === image.id && (
+              <div className="absolute inset-y-0 h-full w-full bg-black/30 flex items-center justify-center">
+                <Check className="h-4 w-4 text-white" />
+              </div>
+            )}
             <Image
               fill
               alt="unsplash image"
