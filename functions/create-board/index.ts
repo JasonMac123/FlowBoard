@@ -11,15 +11,28 @@ import { db } from "@/prisma/db";
 import { createAction } from "@/lib/create-action";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
-  const { userId } = auth();
+  const { userId, orgId } = auth();
 
-  if (!userId) {
+  if (!userId || !orgId) {
     return {
       error: "Do not have permissions.",
     };
   }
 
-  const { title } = data;
+  const { title, image } = data;
+
+  const [imageId, imageThumbUrl, imageFullUrl, imageLinkHTML, imageUserName] =
+    image.split("|");
+
+  if (
+    !imageId ||
+    !imageThumbUrl ||
+    !imageFullUrl ||
+    !imageLinkHTML ||
+    !imageUserName
+  ) {
+    return { error: "Missing image field" };
+  }
 
   let board;
 
@@ -27,6 +40,12 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     board = await db.board.create({
       data: {
         title,
+        orgId,
+        imageId,
+        imageThumbUrl,
+        imageFullUrl,
+        imageUserName,
+        imageLinkHTML,
       },
     });
   } catch (error) {
