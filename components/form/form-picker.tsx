@@ -6,6 +6,7 @@ import { useFormStatus } from "react-dom";
 import { unsplash } from "@/lib/unsplash";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface FormPickerProps {
   id: string;
@@ -65,7 +66,14 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
               if (pending) return;
               setSelectedImageId(image.id);
             }}
-          ></div>
+          >
+            <Image
+              fill
+              alt="unsplash image"
+              className="object-cover rounded-sm"
+              src={image.urls.thumb}
+            />
+          </div>
         ))}
       </div>
     </div>
