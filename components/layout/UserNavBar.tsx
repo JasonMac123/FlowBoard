@@ -6,6 +6,8 @@ import { Button } from "../ui/button";
 import { Logo } from "./Logo";
 import { MobileSideBar } from "../MobileSidebar";
 
+import { FormPopover } from "../form/form-popover";
+
 const UserNavBar = () => {
   return (
     <nav className="fixed z-50 top-0 w-full px-4 h-14 border-b shadow-sm bg-white flex items-center">
@@ -14,13 +16,15 @@ const UserNavBar = () => {
         <div className="hidden md:flex">
           <Logo />
         </div>
-        <Button
-          variant="primary"
-          size="sm"
-          className="rounded-sm hidden md:block h-auto py-1.5 px-2"
-        >
-          create
-        </Button>
+        <FormPopover align="start" side="bottom" sideOffset={18}>
+          <Button
+            variant="primary"
+            size="sm"
+            className="rounded-sm hidden md:block h-auto py-1.5 px-2"
+          >
+            create
+          </Button>
+        </FormPopover>
         <Button
           variant="primary"
           size="sm"
