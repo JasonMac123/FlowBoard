@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs";
 import { notFound, redirect } from "next/navigation";
 
 import { db } from "@/prisma/db";
+import { BoardNavBar } from "@/components/layout/BoardNavBar";
 
 export async function generateMetadata({
   params,
@@ -57,9 +58,8 @@ const BoardIdLayout = async ({
       className="relative h-full bg-no-repeat bg-cover bg-center"
       style={{ backgroundImage: `url(${board.imageFullUrl})` }}
     >
-      <div>
-        <main className="relative pt-28 h-full">{children}</main>
-      </div>
+      <BoardNavBar />
+      <main className="relative pt-28 h-full">{children}</main>
     </div>
   );
 };
