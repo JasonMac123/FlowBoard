@@ -27,8 +27,13 @@ const BoardIdLayout = async ({
   }
 
   return (
-    <div>
-      <main className="relative pt-28 h-full">{children}</main>
+    <div
+      className="relative h-full bg-no-repeat bg-cover bg-center"
+      style={{ backgroundImage: `url(${board.imageFullUrl})` }}
+    >
+      <div>
+        <main className="relative pt-28 h-full">{children}</main>
+      </div>
     </div>
   );
 };
