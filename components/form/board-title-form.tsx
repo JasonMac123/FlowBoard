@@ -6,11 +6,22 @@ import { Board } from "@prisma/client";
 import { Button } from "../ui/button";
 import { FormInput } from "./form-input";
 
+import { updateBoard } from "@/functions/update-board";
+import { useAction } from "@/hooks/useAction";
+import toast from "react-hot-toast";
+
 interface BoardTitleFormProps {
   data: Board;
 }
 
 export const BoardTitleForm = ({ data }: BoardTitleFormProps) => {
+  const { execute } = useAction(updateBoard, {
+    onSuccess: (data) => {
+      toast.success(`Board "${data.title}" updated!`);
+      disableEditing;
+    },
+  });
+
   const formRef = useRef<ElementRef<"form">>(null);
   const inputRef = useRef<ElementRef<"input">>(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -27,13 +38,30 @@ export const BoardTitleForm = ({ data }: BoardTitleFormProps) => {
     setIsEditing(false);
   };
 
+  const onSubmit = (formData: FormData) => {
+    const title = formData.get("title") as string;
+
+    execute({
+      title,
+      id: data.id,
+    });
+  };
+
+  const onBlur = () => {
+    formRef.current?.requestSubmit();
+  };
+
   if (isEditing) {
     return (
-      <form ref={formRef} className="flex itesm-center gap-x-2">
+      <form
+        action={onSubmit}
+        ref={formRef}
+        className="flex itesm-center gap-x-2"
+      >
         <FormInput
           ref={inputRef}
           id="title"
-          onBlur={() => {}}
+          onBlur={onBlur}
           defaultValue={data.title}
           className="text-lg font-bold px-[7px] py-1 h-7 bg-transparent focus-visible:outline-none focus-visible:ring-transparent border-none"
         />
