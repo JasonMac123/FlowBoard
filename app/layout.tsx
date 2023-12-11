@@ -6,7 +6,10 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "",
+  title: {
+    default: "FlowBoard",
+    template: `%s | FlowBoard`,
+  },
   description: "Collaborate, manage projects, and increase your producitivity",
   icons: [
     {

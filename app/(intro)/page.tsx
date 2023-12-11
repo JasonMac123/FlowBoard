@@ -31,7 +31,7 @@ export default function Home() {
         <h1 className="text-3xl md:text-6xl text-center text-neutral-800">
           FlowBoard manages your tasks efficiently
         </h1>
-        <div className="text-3xl md:text-6xl bg-gradient-to-r from-fuchsia-600 to-pink-600 text-white px-4 p-2 mt-4 rounded-md pb-4 w-fit">
+        <div className="text-3xl md:text-6xl bg-gradient-to-r from-fuchsia-600 to-pink-600 text-white px-4 p-2 mt-4 rounded-md w-fit">
           Work efficiently
         </div>
       </div>
