@@ -1,7 +1,7 @@
 import { startCase } from "lodash";
 import { auth } from "@clerk/nextjs";
 
-import { OrganizationControl } from "@/components/OrganizationControl";
+import { OrganizationControl } from "@/components/organization/OrganizationControl";
 
 export async function generateMetadata() {
   const { orgSlug } = auth();

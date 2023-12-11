@@ -9,8 +9,8 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "./ui/accordion";
-import { Button } from "./ui/button";
+} from "../ui/accordion";
+import { Button } from "../ui/button";
 
 export type Organization = {
   id: string;

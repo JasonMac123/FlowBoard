@@ -9,12 +9,11 @@ import {
   useOrganizationList,
 } from "@clerk/nextjs";
 
-import { Button } from "./ui/button";
-import { Separator } from "./ui/separator";
-import { Skeleton } from "./ui/skeleton";
-import { Accordion } from "./ui/accordion";
+import { Button } from "../ui/button";
+import { Skeleton } from "../ui/skeleton";
+import { Accordion } from "../ui/accordion";
 
-import { NavItem, Organization } from "./Navitem";
+import { NavItem, Organization } from "../organization/Navitem";
 
 interface SideBarProps {
   storageKey?: string;

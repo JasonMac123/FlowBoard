@@ -4,8 +4,8 @@ import { usePathname } from "next/navigation";
 
 import { useMobileSideBar } from "@/hooks/useMobileSideBar";
 import { Menu } from "lucide-react";
-import { Button } from "./ui/button";
-import { Sheet, SheetContent } from "./ui/sheet";
+import { Button } from "../ui/button";
+import { Sheet, SheetContent } from "../ui/sheet";
 import { SideBar } from "./Sidebar";
 
 export const MobileSideBar = () => {
