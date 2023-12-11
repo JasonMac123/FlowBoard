@@ -1,13 +1,19 @@
 "use client";
 
-import { Plus } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import { useEventListener, useOnClickOutside } from "usehooks-ts";
+import { useParams } from "next/navigation";
 import { useState, useRef, ElementRef } from "react";
 
 import { ListWrapper } from "../board/ListWrapper";
+
 import { FormInput } from "./form-input";
+import { FormSubmit } from "./form-submit";
+import { Button } from "../ui/button";
 
 export const ListForm = () => {
+  const params = useParams();
+
   const [isEditing, setIsEditing] = useState(false);
 
   const formRef = useRef<ElementRef<"form">>(null);
@@ -45,6 +51,13 @@ export const ListForm = () => {
             id="title"
             className="text-sm px-2 py-1 h-7 font-medium border-transparent hover:border-input focus:border-input transition"
           />
+          <input hidden value={params.boardId} name="boardId" />
+          <div className="flex items-center gap-x01">
+            <FormSubmit>Add List</FormSubmit>
+            <Button onClick={disableEditing} size="sm" variant="ghost">
+              <X className="h-5 w-5" />
+            </Button>
+          </div>
         </form>
       </ListWrapper>
     );
