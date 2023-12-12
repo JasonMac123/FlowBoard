@@ -1,17 +1,23 @@
 "use client";
 
 import { Plus, X } from "lucide-react";
+import toast from "react-hot-toast";
 import { useEventListener, useOnClickOutside } from "usehooks-ts";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useState, useRef, ElementRef } from "react";
 
 import { ListWrapper } from "../board/ListWrapper";
 
+import { useAction } from "@/hooks/useAction";
+import { createList } from "@/functions/create-list";
+
 import { FormInput } from "./form-input";
 import { FormSubmit } from "./form-submit";
 import { Button } from "../ui/button";
+import { error } from "console";
 
 export const ListForm = () => {
+  const router = useRouter();
   const params = useParams();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -30,6 +36,17 @@ export const ListForm = () => {
     setIsEditing(false);
   };
 
+  const { execute, fieldErrors } = useAction(createList, {
+    onSuccess: (data) => {
+      toast.success(`List "${data.title}" created`);
+      disableEditing();
+      router.refresh();
+    },
+    onError: (error) => {
+      toast.error(error);
+    },
+  });
+
   const onKeyDown = (e: KeyboardEvent) => {
     if (e.key === "Escape") {
       disableEditing();
@@ -39,10 +56,21 @@ export const ListForm = () => {
   useEventListener("keydown", onKeyDown);
   useOnClickOutside(formRef, disableEditing);
 
+  const onSubmit = (formData: FormData) => {
+    const title = formData.get("title") as string;
+    const boardId = formData.get("boardId") as string;
+
+    execute({
+      title,
+      boardId,
+    });
+  };
+
   if (isEditing) {
     return (
       <ListWrapper>
         <form
+          action={onSubmit}
           ref={formRef}
           className="w-full p-3 rounded-md bg-white space-y-4 shadow-md"
         >
