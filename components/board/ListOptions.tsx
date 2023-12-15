@@ -1,6 +1,6 @@
 "use client";
 
-import { MoreHorizontal } from "lucide-react";
+import { MoreHorizontal, X } from "lucide-react";
 
 import { Button } from "../ui/button";
 import {
@@ -25,6 +25,19 @@ export const ListOptions = ({ onAddCard, data }: ListOptionsProps) => {
           <MoreHorizontal className="h-4 w-4" />
         </Button>
       </PopoverTrigger>
+      <PopoverContent className="px-0 pt-3 pb-3" side="bottom" align="start">
+        <div className="text-sm font-medium text-center text-neutral-600 pb-4">
+          List actions
+        </div>
+        <PopoverClose asChild>
+          <Button
+            className="h-auto w-auto p-2 absolute top-2 right-2 text-neutral-600"
+            variant="ghost"
+          >
+            <X className="h-4 w-4 " />
+          </Button>
+        </PopoverClose>
+      </PopoverContent>
     </Popover>
   );
 };
