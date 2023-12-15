@@ -1,5 +1,6 @@
 "use client";
 
+import { ElementRef, useRef } from "react";
 import { MoreHorizontal, X } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -23,9 +24,12 @@ interface ListOptionsProps {
 }
 
 export const ListOptions = ({ onAddCard, data }: ListOptionsProps) => {
+  const closeRef = useRef<ElementRef<"button">>(null);
+
   const { execute: executeDelete } = useAction(deleteList, {
     onSuccess: (data) => {
       toast.success(`List "${data.title}" deleted`);
+      closeRef.current?.click();
     },
     onError: (error) => {
       toast.error(error);
@@ -50,7 +54,7 @@ export const ListOptions = ({ onAddCard, data }: ListOptionsProps) => {
         <div className="text-sm font-medium text-center text-neutral-600 pb-4">
           List actions
         </div>
-        <PopoverClose asChild>
+        <PopoverClose ref={closeRef} asChild>
           <Button
             className="h-auto w-auto p-2 absolute top-2 right-2 text-neutral-600"
             variant="ghost"
