@@ -1,5 +1,6 @@
 "use client";
 
+import { toast } from "react-hot-toast";
 import { Plus, X } from "lucide-react";
 import { useRef, ElementRef, KeyboardEventHandler, forwardRef } from "react";
 import { useParams } from "next/navigation";
@@ -25,7 +26,15 @@ export const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(
 
     const formRef = useRef<ElementRef<"form">>(null);
 
-    const { execute, fieldErrors } = useAction(createCard);
+    const { execute, fieldErrors } = useAction(createCard, {
+      onSuccess: (data) => {
+        toast.success(`Card "${data.title}" created`);
+        formRef.current?.reset();
+      },
+      onError: (error) => {
+        toast.error(error);
+      },
+    });
 
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -48,7 +57,7 @@ export const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(
     const onSubmit = (formData: FormData) => {
       const title = formData.get("title") as string;
       const listId = formData.get("listId") as string;
-      const boardId = formData.get("boardId") as string;
+      const boardId = params.boardId as string;
 
       execute({ title, listId, boardId });
     };
@@ -62,9 +71,10 @@ export const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(
         >
           <FormTextarea
             id="title"
-            onKeyDown={() => {}}
+            onKeyDown={onTextareaKeyDown}
             ref={ref}
             placeholder="Enter a title"
+            errors={fieldErrors}
           />
           <input hidden id="listId" name="listId" value={listId} />
           <div className="flex items-center gap-x-1">
