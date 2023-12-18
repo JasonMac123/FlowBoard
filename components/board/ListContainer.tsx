@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 
 import { useAction } from "@/hooks/useAction";
 import { updateListOrder } from "@/functions/update-list-order/";
+import { updateCardOrder } from "@/functions/update-card-order";
 
 import { ListWithCards } from "@/types";
 import { ListForm } from "../form/list-form";
@@ -29,6 +30,15 @@ export const ListContainer = ({ boardId, data }: ListContainerProps) => {
   const { execute: executeUpdateListOrder } = useAction(updateListOrder, {
     onSuccess: () => {
       toast.success("Moved list");
+    },
+    onError: (error) => {
+      toast.error(error);
+    },
+  });
+
+  const { execute: executeUpdateCardOrder } = useAction(updateCardOrder, {
+    onSuccess: () => {
+      toast.success("Cards reordered");
     },
     onError: (error) => {
       toast.error(error);
@@ -100,6 +110,7 @@ export const ListContainer = ({ boardId, data }: ListContainerProps) => {
         });
 
         setOrderedData(newOrderedData);
+        executeUpdateCardOrder({ boardId, items: reorderedCards });
       } else {
         // Remove from source list and move to destination list
         const [movedCard] = sourceList.cards.splice(source.index, 1);
