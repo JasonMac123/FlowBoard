@@ -88,6 +88,22 @@ export const ListContainer = ({ boardId, data }: ListContainerProps) => {
         });
 
         setOrderedData(newOrderedData);
+      } else {
+        // Remove from source list and move to destination list
+        const [movedCard] = sourceList.cards.splice(source.index, 1);
+        movedCard.listId = destination.droppableId;
+        destinationList.cards.splice(destination.index, 0, movedCard);
+
+        // update card ordering
+        sourceList.cards.forEach((card, i) => {
+          card.order = i;
+        });
+
+        destinationList.cards.forEach((card, i) => {
+          card.order = i;
+        });
+
+        setOrderedData(newOrderedData);
       }
     }
   };
