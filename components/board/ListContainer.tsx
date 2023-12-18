@@ -6,6 +6,8 @@ import { DragDropContext, Droppable } from "@hello-pangea/dnd";
 import { ListWithCards } from "@/types";
 import { ListForm } from "../form/list-form";
 import { ListItem } from "./ListItem";
+import { list } from "unsplash-js/dist/methods/photos";
+import { CardForm } from "./CardForm";
 
 interface ListContainerProps {
   boardId: string;
@@ -34,7 +36,6 @@ export const ListContainer = ({ boardId, data }: ListContainerProps) => {
     }
 
     // dropped in same position
-
     if (
       destination.droppableId === source.droppableId &&
       destination.index === source.index
@@ -49,6 +50,45 @@ export const ListContainer = ({ boardId, data }: ListContainerProps) => {
       );
 
       setOrderedData(items);
+    }
+
+    if (type === "card") {
+      let newOrderedData = [...orderedData];
+
+      const sourceList = newOrderedData.find(
+        (list) => list.id === source.droppableId
+      );
+      const destinationList = newOrderedData.find(
+        (list) => list.id === destination.droppableId
+      );
+
+      if (!sourceList || !destinationList) {
+        return;
+      }
+
+      // if cards exist on source
+
+      if (!sourceList.cards) {
+        sourceList.cards = [];
+      }
+
+      if (!destinationList.cards) {
+        destinationList.cards = [];
+      }
+
+      if (source.droppableId === destination.droppableId) {
+        const reorderedCards = reOrder(
+          sourceList.cards,
+          source.index,
+          destination.index
+        );
+
+        reorderedCards.forEach((card, i) => {
+          card.order = i;
+        });
+
+        setOrderedData(newOrderedData);
+      }
     }
   };
 
