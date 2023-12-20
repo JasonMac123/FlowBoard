@@ -1,11 +1,14 @@
 "use client";
 
+import toast from "react-hot-toast";
 import { useState, ElementRef, useRef } from "react";
 import { useParams } from "next/navigation";
 import { Layout } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { CardWithList } from "@/types";
+import { useAction } from "@/hooks/useAction";
+import { updateCard } from "@/functions/update-card";
 
 import { FormInput } from "@/components/form/form-input";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -18,6 +21,18 @@ export const Header = ({ data }: HeaderProps) => {
   const queryClient = useQueryClient();
   const params = useParams();
 
+  const { execute } = useAction(updateCard, {
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["card", data.id] });
+      toast.success(`Renamed to "${data.title}"`);
+
+      setTitle(data.title);
+    },
+    onError: (error) => {
+      toast.error(error);
+    },
+  });
+
   const inputRef = useRef<ElementRef<"input">>(null);
   const [title, setTitle] = useState(data.title);
 
@@ -26,14 +41,25 @@ export const Header = ({ data }: HeaderProps) => {
   };
 
   const onSubmit = (formData: FormData) => {
-    const title = formData.get("title" as string);
+    const title = formData.get("title") as string;
+    const boardId = params.boardId as string;
+
+    if (title === data.title) {
+      return;
+    }
+
+    execute({
+      title,
+      boardId,
+      id: data.id,
+    });
   };
 
   return (
     <div className="flex items-start gap-x-3 mb-6 w-full">
       <Layout className="h-5 w-5 mt-1 text-neutral-700" />
       <div className="w-full">
-        <form>
+        <form action={onSubmit}>
           <FormInput
             ref={inputRef}
             id="title"
