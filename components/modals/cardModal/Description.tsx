@@ -2,11 +2,15 @@
 
 import { useState, useRef, ElementRef } from "react";
 import { useParams } from "next/navigation";
+import toast from "react-hot-toast";
 import { useQueryClient } from "@tanstack/react-query";
 import { AlignLeft } from "lucide-react";
 import { useEventListener, useOnClickOutside } from "usehooks-ts";
 
 import { CardWithList } from "@/types";
+
+import { useAction } from "@/hooks/useAction";
+import { updateCard } from "@/functions/update-card";
 
 import { Skeleton } from "@/components/ui/skeleton";
 import { FormTextarea } from "@/components/form/form-textarea";
@@ -46,9 +50,27 @@ export const Description = ({ data }: DescriptionProps) => {
   useEventListener("keydown", onKeyDown);
   useOnClickOutside(formRef, disableEditing);
 
+  const { execute, fieldErrors } = useAction(updateCard, {
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: ["card", data.id],
+      });
+      toast.success(`Card "${data.title}" updated`);
+    },
+    onError: (error) => {
+      toast.error(error);
+    },
+  });
+
   const onSubmit = (formData: FormData) => {
     const description = formData.get("description") as string;
     const boardId = params.boardId as string;
+
+    execute({
+      description,
+      boardId,
+      id: data.id,
+    });
   };
 
   return (
@@ -59,10 +81,12 @@ export const Description = ({ data }: DescriptionProps) => {
         {isEditing ? (
           <form ref={formRef} action={onSubmit} className="space-y-2">
             <FormTextarea
+              ref={textareaRef}
               id="description"
               classname="w-full mt-2"
               placeholder="Add a more detailed description"
               defaultValue={data.description || undefined}
+              errors={fieldErrors}
             />
             <div className="flex items-center gap-x-2">
               <FormSubmit>Save</FormSubmit>
