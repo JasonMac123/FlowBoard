@@ -9,6 +9,9 @@ import { useEventListener, useOnClickOutside } from "usehooks-ts";
 import { CardWithList } from "@/types";
 
 import { Skeleton } from "@/components/ui/skeleton";
+import { FormTextarea } from "@/components/form/form-textarea";
+import { FormSubmit } from "@/components/form/form-submit";
+import { Button } from "@/components/ui/button";
 
 interface DescriptionProps {
   data: CardWithList;
@@ -54,7 +57,25 @@ export const Description = ({ data }: DescriptionProps) => {
       <div className="w-full">
         <p className="font-semibold text-neutral-700 mb-2">Description</p>
         {isEditing ? (
-          <form action={onSubmit}></form>
+          <form ref={formRef} action={onSubmit} className="space-y-2">
+            <FormTextarea
+              id="description"
+              classname="w-full mt-2"
+              placeholder="Add a more detailed description"
+              defaultValue={data.description || undefined}
+            />
+            <div className="flex items-center gap-x-2">
+              <FormSubmit>Save</FormSubmit>
+              <Button
+                type="button"
+                onClick={disableEditing}
+                size="sm"
+                variant="ghost"
+              >
+                Cancel
+              </Button>
+            </div>
+          </form>
         ) : (
           <div
             onClick={enableEditing}
