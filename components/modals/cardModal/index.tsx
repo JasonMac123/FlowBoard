@@ -9,6 +9,7 @@ import { CardWithList } from "@/types";
 import { fetcher } from "@/lib/fetcher";
 import { Header } from "./Header";
 import { Description } from "./Description";
+import { CardActions } from "./CardActions";
 
 export const CardModal = () => {
   const id = useCardModal((state) => state.id);
@@ -34,6 +35,11 @@ export const CardModal = () => {
               )}
             </div>
           </div>
+          {!cardData ? (
+            <CardActions.skeleton />
+          ) : (
+            <CardActions data={cardData} />
+          )}
         </div>
       </DialogContent>
     </Dialog>
