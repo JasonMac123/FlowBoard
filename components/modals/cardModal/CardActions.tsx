@@ -13,7 +13,7 @@ export const CardActions = ({ data }: CardActionsProps) => {
   return (
     <div className="space-y-2 mt-2">
       <p className="text-xs font-semibold">Actions</p>
-      <Button variant="gray">
+      <Button variant="gray" className="w-full justify-start" size="inline">
         <Trash /> Delete this card
       </Button>
     </div>
