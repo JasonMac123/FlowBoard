@@ -1,10 +1,12 @@
 "use client";
 
 import { Trash } from "lucide-react";
+import toast from "react-hot-toast";
 import { useParams } from "next/navigation";
 
 import { CardWithList } from "@/types";
 import { useAction } from "@/hooks/useAction";
+import { useCardModal } from "@/hooks/useCardModal";
 import { deleteCard } from "@/functions/delete-card";
 
 import { Button } from "@/components/ui/button";
@@ -16,8 +18,17 @@ interface CardActionsProps {
 
 export const CardActions = ({ data }: CardActionsProps) => {
   const params = useParams();
+  const cardModal = useCardModal();
 
-  const { execute, isLoading } = useAction(deleteCard);
+  const { execute, isLoading } = useAction(deleteCard, {
+    onSuccess: (data) => {
+      toast.success(`Card "${data.title}" deleted`);
+      cardModal.onClose();
+    },
+    onError: (error) => {
+      toast.error(error);
+    },
+  });
 
   const onDelete = () => {
     const boardId = params.boardId as string;
