@@ -1,7 +1,9 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CardWithList } from "@/types";
+import { Trash } from "lucide-react";
 
 interface CardActionsProps {
   data: CardWithList;
@@ -9,8 +11,11 @@ interface CardActionsProps {
 
 export const CardActions = ({ data }: CardActionsProps) => {
   return (
-    <div>
-      <p>Actions</p>
+    <div className="space-y-2 mt-2">
+      <p className="text-xs font-semibold">Actions</p>
+      <Button variant="gray">
+        <Trash /> Delete this card
+      </Button>
     </div>
   );
 };
