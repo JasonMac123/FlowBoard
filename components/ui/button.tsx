@@ -21,6 +21,7 @@ const buttonVariants = cva(
         primary:
           "bg-gradient-to-br from-green-200 via-green-400 to-green-500 text-primary-foreground hover:opacity-90 hover:scale-105 transition text-black",
         transparent: "bg-transparent text-white hover:bg-white/20",
+        gray: "bg-neutral-200 text-secondary-foreground hover:bg-neutral-300",
       },
       size: {
         default: "h-10 px-4 py-2",
