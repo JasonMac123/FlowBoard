@@ -1,19 +1,40 @@
 "use client";
 
+import { Trash } from "lucide-react";
+import { useParams } from "next/navigation";
+
+import { CardWithList } from "@/types";
+import { useAction } from "@/hooks/useAction";
+import { deleteCard } from "@/functions/delete-card";
+
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { CardWithList } from "@/types";
-import { Trash } from "lucide-react";
 
 interface CardActionsProps {
   data: CardWithList;
 }
 
 export const CardActions = ({ data }: CardActionsProps) => {
+  const params = useParams();
+
+  const { execute, isLoading } = useAction(deleteCard);
+
+  const onDelete = () => {
+    const boardId = params.boardId as string;
+
+    execute({ id: data.id, boardId });
+  };
+
   return (
     <div className="space-y-2 mt-2">
       <p className="text-xs font-semibold">Actions</p>
-      <Button variant="gray" className="w-full justify-start" size="inline">
+      <Button
+        variant="gray"
+        className="w-full justify-start"
+        size="inline"
+        onClick={onDelete}
+        disabled={isLoading}
+      >
         <Trash /> Delete this card
       </Button>
     </div>
