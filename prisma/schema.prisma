@@ -74,8 +74,9 @@ model AuditLog {
   id String @id @default(uuid())
   orgId String
   action ACTION
-  entityID String
+  entityId String
   entityType ENTITY_TYPE
+  entityTitle String
   userId String
   userImage String @db.Text
   userName String @db.Text
