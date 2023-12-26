@@ -37,7 +37,7 @@ export const CardModal = () => {
           <div className="col-span-3">
             <div className="w-full space-y-6">
               {!cardData ? (
-                <Description.skeleton />
+                <Description.Skeleton />
               ) : (
                 <Description data={cardData} />
               )}
@@ -49,7 +49,7 @@ export const CardModal = () => {
             </div>
           </div>
           {!cardData ? (
-            <CardActions.skeleton />
+            <CardActions.Skeleton />
           ) : (
             <CardActions data={cardData} />
           )}
