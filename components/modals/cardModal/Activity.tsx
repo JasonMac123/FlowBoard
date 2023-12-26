@@ -1,8 +1,13 @@
 "use client";
 
 import { Skeleton } from "@/components/ui/skeleton";
+import { AuditLog } from "@prisma/client";
 
-export const Activity = () => {
+interface ActivityProps {
+  data: AuditLog[];
+}
+
+export const Activity = ({ data }: ActivityProps) => {
   return <div></div>;
 };
 

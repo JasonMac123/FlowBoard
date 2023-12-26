@@ -44,7 +44,7 @@ export const CardModal = () => {
               {!auditLogsData ? (
                 <Activity.Skeleton />
               ) : (
-                <Activity data={cardData} />
+                <Activity data={auditLogsData} />
               )}
             </div>
           </div>
