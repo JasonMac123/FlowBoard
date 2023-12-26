@@ -4,7 +4,7 @@ import { Plus } from "lucide-react";
 import { Button } from "../ui/button";
 
 import { Logo } from "./Logo";
-import { MobileSideBar } from "../MobileSidebar";
+import { MobileSideBar } from "./MobileSidebar";
 
 import { FormPopover } from "../form/form-popover";
 

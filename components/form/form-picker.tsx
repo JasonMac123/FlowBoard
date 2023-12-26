@@ -48,7 +48,7 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
       }
     };
     fetchImages();
-  });
+  }, []);
 
   if (isLoading) {
     return (
