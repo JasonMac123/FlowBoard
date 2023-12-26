@@ -1,12 +1,14 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import { AuditLog } from "@prisma/client";
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useCardModal } from "@/hooks/useCardModal";
 
 import { CardWithList } from "@/types";
 import { fetcher } from "@/lib/fetcher";
+
 import { Header } from "./Header";
 import { Description } from "./Description";
 import { CardActions } from "./CardActions";
@@ -19,6 +21,11 @@ export const CardModal = () => {
   const { data: cardData } = useQuery<CardWithList>({
     queryKey: ["card", id],
     queryFn: () => fetcher(`/api/cards/${id}`),
+  });
+
+  const { data: auditLogsData } = useQuery<AuditLog[]>({
+    queryKey: ["card-logs", id],
+    queryFn: () => fetcher(`/api/cards/${id}/logs`),
   });
 
   return (
