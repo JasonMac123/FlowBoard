@@ -12,6 +12,7 @@ import { fetcher } from "@/lib/fetcher";
 import { Header } from "./Header";
 import { Description } from "./Description";
 import { CardActions } from "./CardActions";
+import { Activity } from "./Activity";
 
 export const CardModal = () => {
   const id = useCardModal((state) => state.id);
@@ -39,6 +40,11 @@ export const CardModal = () => {
                 <Description.skeleton />
               ) : (
                 <Description data={cardData} />
+              )}
+              {!auditLogsData ? (
+                <Activity.Skeleton />
+              ) : (
+                <Activity data={cardData} />
               )}
             </div>
           </div>
