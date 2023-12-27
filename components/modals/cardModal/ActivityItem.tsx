@@ -1,4 +1,5 @@
 import { AuditLog } from "@prisma/client";
+import { format } from "date-fns";
 
 import { createLogMessage } from "@/lib/create-log-message";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -19,6 +20,9 @@ export const ActivityItem = ({ data }: ActivityItemProps) => {
             {data.userName}
           </span>{" "}
           {createLogMessage(data)}
+        </p>
+        <p className="text-xs text-muted-foreground">
+          {format(new Date(data.createdAt), "MMM d, yyyy 'at' h:mm a")}
         </p>
       </div>
     </li>
