@@ -9,7 +9,7 @@ const ActivityPage = () => {
     <div className="w-full">
       <Info />
       <Separator className="my-2" />
-      <Suspense>
+      <Suspense fallback={<ActivityList.Skeleton />}>
         <ActivityList />
       </Suspense>
     </div>
